@@ -13,6 +13,10 @@ if [ ! "$DISABLE_COLLECTSTATIC" ] && [ -f "$MANAGE_FILE" ]; then
     set +e
 
     echo "-----> Preparing static assets"
+    # Get install bower dependencies
+    echo "       Installing bower dependencies..."
+    python $MANAGE_FILE bower install
+    
     # Check if collectstatic is configured properly.
     python $MANAGE_FILE collectstatic --dry-run --noinput &> /dev/null && RUN_COLLECTSTATIC=true
 
