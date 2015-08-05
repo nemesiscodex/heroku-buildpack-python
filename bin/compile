@@ -87,6 +87,20 @@ if [[ ! "$DOCKER_BUILD" ]]; then
   bpwatch stop appdir_stage
 fi
 
+# bower install
+if hash bower 2>/dev/null; then
+  echo "        Installing bower deps"
+  cd $APP_DIR
+  if [ -f bower.json ]; then
+    bower install
+  else
+    echo "No bower.json"
+  fi
+  
+  cd -
+else
+  echo "        Bower not found :("
+fi
 
 # Set new context.
 ORIG_BUILD_DIR=$BUILD_DIR
