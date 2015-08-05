@@ -178,7 +178,9 @@ source $BIN_DIR/steps/cryptography
 source $BIN_DIR/steps/gdal
 
 # Install dependencies with Pip.
-source $BIN_DIR/steps/pip-install
+
+# Django collectstatic support.
+sub-env $BIN_DIR/steps/collectstatic
 
 # ### Finalize
 #
@@ -226,15 +228,4 @@ if [[ ! "$DOCKER_BUILD" ]]; then
   bpwatch stop compile
 fi
 
-if hash bower 2>/dev/null; then
-  echo "        Installing bower deps"
-  cd $APP_DIR
-  bower install
-  cd -
-else
-  echo "        Bower not found :("
-fi
-
-# Django collectstatic support.
-sub-env $BIN_DIR/steps/collectstatic
 
