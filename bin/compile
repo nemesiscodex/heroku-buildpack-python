@@ -226,6 +226,12 @@ if [[ ! "$DOCKER_BUILD" ]]; then
   bpwatch stop compile
 fi
 
+if hash bower 2>/dev/null; then
+  echo "        Installing bower deps"
+  bower install
+else
+  echo "        Bower not found :("
+fi
 
 # Django collectstatic support.
 sub-env $BIN_DIR/steps/collectstatic
